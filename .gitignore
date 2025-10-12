@@ -36,6 +36,7 @@ check_*
 *.png
 *.csv
 *.json
+!data/atlas_min.json
 assets/
 
 # Exception: Keep committed images for README
