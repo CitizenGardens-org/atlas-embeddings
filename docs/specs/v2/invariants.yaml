@@ -4,6 +4,8 @@ invariants:
     statement: "|R(B)| == 96"
     model_ref: models/R96_model.json
     obligation_ids: [obl.R96.enumeration, obl.R96.collapse-parity]
+    api_bindings: [r96.enumerate, r96.is_canonical]
+    proof_stub: R96Enumeration.lean
     test_bindings: [t.R96.enumerate, t.R96.collapse_parity]
     owner: Spec Lead
     status: frozen

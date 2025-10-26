@@ -1,0 +1,10 @@
+text: |
+  proof_toolchain_pinned: true
+  codegen_from_spec: true
+  seed_policy_hsm: true
+  fdr_control_enabled: true
+  prod_sentinels_enabled: true
+  sbom_100: true
+  slsa_level: 'L3+'
+  override_quorum: '2-of-3'
+  exact_arith_in_tcb: true
