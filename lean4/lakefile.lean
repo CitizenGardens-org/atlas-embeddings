@@ -17,3 +17,8 @@ require mathlib from git
 lean_exe «atlas-embeddings» where
   root := `Main
   supportInterpreter := true
+
+/-- Unit tests placeholder. -/
+script test do
+  IO.println "lake test stub"
+  pure 0

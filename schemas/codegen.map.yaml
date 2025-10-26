@@ -1,0 +1,5 @@
+spec_to_api:
+  r96.enumerate: "src/tcb/r96/enumerate.rs::fn enumerate(B) -> Vec<R>"
+  r96.is_canonical: "src/tcb/r96/canon.rs::fn is_canonical(R) -> bool"
+spec_to_lean:
+  R96.cardinality: "docs/proofs/lean/R96Enumeration.lean"

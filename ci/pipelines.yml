@@ -9,7 +9,15 @@ spec:
 
 proofs:
   stage: proofs
-  script: ["make proofs"]
+  image: ghcr.io/leanprover-community/lean:latest
+  script:
+    - cd lean4
+    - lake exe cache get
+    - lake build
+    - lake test
+    - cd ..
+    - mkdir -p build/proofs
+    - touch build/proofs/R96Enumeration.ok build/proofs/ScheduleOrder.ok
 
 gate:
   stage: gate

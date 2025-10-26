@@ -1,0 +1,3 @@
+override_quorum: '2-of-3'
+auto_expire_hours: 24
+receipt_required: true

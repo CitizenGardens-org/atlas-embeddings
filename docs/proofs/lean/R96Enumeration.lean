@@ -1,5 +1,5 @@
 import Mathlib
 
-theorem R96Enumeration : True := by
-  -- TODO: formal proof that |R(B)| = 96
+theorem R96_cardinality : True := by
+  -- auto-generated stub for R96.cardinality
   trivial

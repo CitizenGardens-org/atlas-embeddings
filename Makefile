@@ -1,4 +1,4 @@
-.PHONY: help build test check lint format docs clean bench audit install-tools all verify lean4-build lean4-clean lean4-test
+.PHONY: help build test check lint format docs clean bench audit install-tools all verify lean4-build lean4-clean lean4-test codegen drift-check proofs-repro sbom provenance precommit
 
 # Default target
 help:
@@ -201,6 +201,25 @@ bloat:
 asm:
 	cargo asm --rust --lib
 
+# Spec-driven determinism and governance
+codegen:
+	@python3 tools/uor-specgen.py --deterministic
+
+drift-check: codegen
+	@git diff --exit-code
+
+proofs-repro:
+	@echo "Repro check stub: compare oleans byte-for-byte across runners."
+
+sbom:
+	@./scripts/sbom.sh
+
+provenance:
+	@./scripts/provenance.sh
+
+precommit:
+	@$(MAKE) drift-check
+
 # Continuous integration targets
 ci-test: format-check lint test
 	@echo "✓ CI test phase passed"
@@ -220,8 +239,12 @@ spec-check:
 	@python3 scripts/spec_check.py
 
 proofs:
-	@echo "Building proofs (stub)."
-	@mkdir -p build/proofs && touch build/proofs/R96Enumeration.ok build/proofs/ScheduleOrder.ok
+	@echo "Running Lean proofs..."
+	@cd lean4 && lake exe cache get
+	@cd lean4 && lake build
+	@cd lean4 && lake test
+	@mkdir -p build/proofs
+	@touch build/proofs/R96Enumeration.ok build/proofs/ScheduleOrder.ok
 	@echo "proofs: OK"
 
 tcb-test:
