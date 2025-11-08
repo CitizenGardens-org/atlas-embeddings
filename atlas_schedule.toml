@@ -1,0 +1,25 @@
+# Atlas Schedule Configuration - C768 fair traversal
+
+[schedule]
+# Schedule type: C768 fair traversal with marginal stationarity
+type = "C768"
+
+# Period: 768 steps per window
+window_size = 768
+
+# Total steps to cover all cells: 16 windows × 768 = 12,288
+total_windows = 16
+
+[fairness]
+# Round-robin across classes and anchors
+enable_round_robin = true
+
+# Audit frequency: emit audit entry every N steps
+audit_interval = 768
+
+[lattice]
+# Lattice dimensions
+classes = 96
+anchors_per_class = 6
+orbit_size = 2048
+coords_per_class = 12288
