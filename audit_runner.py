@@ -20,15 +20,16 @@ def load_toml(path: str) -> Dict[str, Any]:
     """Load TOML configuration file."""
     try:
         import tomli
+        toml_module = tomli
     except ImportError:
         # Fallback for Python 3.11+
         try:
-            import tomllib as tomli
+            import tomllib as toml_module  # type: ignore
         except ImportError:
             raise ImportError("Please install tomli for Python < 3.11: pip install tomli")
     
     with open(path, "rb") as f:
-        return tomli.load(f)
+        return toml_module.load(f)
 
 
 def load_ledger(path: str) -> List[Dict[str, Any]]:
@@ -39,7 +40,11 @@ def load_ledger(path: str) -> List[Dict[str, Any]]:
     if isinstance(data, list):
         return data
     elif isinstance(data, dict) and "entries" in data:
-        return data["entries"]
+        entries = data["entries"]
+        if isinstance(entries, list):
+            return entries
+        else:
+            raise ValueError("'entries' must be a list")
     else:
         raise ValueError("Ledger must be a JSON list or dict with 'entries' key")
 
